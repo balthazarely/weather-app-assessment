@@ -54,7 +54,7 @@ export default function ChangeCityModal({
         <div className="relative mx-2 p-8 bg-white h-72 w-96 rounded-lg shadow-2xl ">
           <BsX
             onClick={() => setShowSearchPopup(false)}
-            className="absolute top-0 right-0 m-2 text-2xl cursor-pointer"
+            className="absolute top-0 right-0 m-2 text-2xl cursor-pointer hover:text-cyan-500 transition duration-200"
           />
           <div className="relative">
             <input
@@ -62,7 +62,7 @@ export default function ChangeCityModal({
               type="text"
               value={query}
               className="absolute top-0 left-0 w-full px-5 py-2 text-lg text-sky-600  rounded-lg border-2 border-cyan-500 focus:border-cyan-700 outline-none transition"
-              placeholder="Search your query..."
+              placeholder="Search for city"
             />
             {cityDataLoading && (
               <Loader
@@ -80,9 +80,9 @@ export default function ChangeCityModal({
                   <div
                     key={index}
                     onMouseDown={() => search(city)}
-                    className="cursor-pointer hover:bg-gray-500 hover:bg-opacity-10 p-2"
+                    className="cursor-pointer hover:bg-gray-500 hover:bg-opacity-10 pt-2 pb-1"
                   >
-                    {city.name} - {city.state}
+                    {city.name} - {city.state} - {city.country}
                   </div>
                 );
               })}

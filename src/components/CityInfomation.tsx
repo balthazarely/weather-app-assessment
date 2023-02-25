@@ -11,7 +11,7 @@ export default function CityInfomation({ selectedCity }: iCityInfomation) {
   return (
     <div className="h-[65px] text-white">
       {selectedCity ? (
-        <div>
+        <div className="">
           <div className="flex relative flex-col">
             <div className="flex items-center justify-center gap-2">
               <FaMapMarkerAlt />
@@ -20,7 +20,7 @@ export default function CityInfomation({ selectedCity }: iCityInfomation) {
               </h1>
             </div>
           </div>
-          <h3>
+          <h3 className="text-center">
             {moment(selectedCity.weather.days[0].datetime).format(
               "dddd, MMM  Do, YYYY"
             )}

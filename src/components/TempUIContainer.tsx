@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { iSelectedCity } from "../types";
 import WeeklyWeatherDisplay from "./WeeklyWeatherDisplay";
