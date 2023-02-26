@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsX } from "react-icons/bs";
+import { GlobalContext } from "../store/store";
 import { iCityOptions } from "../types";
 import Loader from "./Loader";
 
-interface iChangeCityInterface {
-  searchForCity: (value: string) => void;
-  cityOptions: iCityOptions[] | any[];
-  getCityWeather: (state: iCityOptions) => void;
-  setShowSearchPopup: (value: boolean) => void;
-  showSearchPopup: boolean;
-  cityDataLoading: boolean;
-}
-
-export default function ChangeCityModal({
-  searchForCity,
-  cityOptions,
-  getCityWeather,
-  setShowSearchPopup,
-  showSearchPopup,
-  cityDataLoading,
-}: iChangeCityInterface) {
+export default function ChangeCityModal() {
   const [showResults, setShowResults] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
+  const {
+    showSearchPopup,
+    setShowSearchPopup,
+    cityOptions,
+    setCityOptions,
+    cityDataLoading,
+    searchForCity,
+    getCityWeather,
+  } = useContext(GlobalContext);
 
-  const search = (city: any) => {
+  const searchForCityGeoCords = (city: iCityOptions) => {
     getCityWeather(city);
+    setQuery("");
+    setShowSearchPopup(false);
+  };
+
+  const closeBtn = () => {
+    setCityOptions(null);
     setQuery("");
     setShowSearchPopup(false);
   };
@@ -48,14 +48,16 @@ export default function ChangeCityModal({
         className={`${
           showSearchPopup
             ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        } absolute z-50 flex transition-opacity duration-300  justify-center items-center top-0 left-0 w-full h-screen bg-sky-600 bg-opacity-50`}
+            : "opacity-0 pointer-events-none "
+        } absolute z-50 flex  transition-opacity duration-300  justify-center items-center top-0 left-0 w-full h-screen bg-sky-700 bg-opacity-50`}
       >
-        <div className="relative mx-2 p-8 bg-white h-72 w-96 rounded-lg shadow-2xl ">
-          <BsX
-            onClick={() => setShowSearchPopup(false)}
-            className="absolute top-0 right-0 m-2 text-2xl cursor-pointer hover:text-cyan-500 transition duration-200"
-          />
+        <div
+          className={` ${showSearchPopup ? "translate-y-0" : "translate-y-10 "}
+        relative transform duration-300 mx-2 px-8 py-4 bg-white h-96 w-96 rounded-lg shadow-2xl `}
+        >
+          <button onClick={closeBtn}>
+            <BsX className="focus:outline-none focus:ring focus:ring-violet-300 absolute top-0 right-0 m-2 text-2xl cursor-pointer hover:text-cyan-500 transition duration-200" />
+          </button>
           <div className="relative">
             <input
               onChange={(e) => setQuery(e.target.value)}
@@ -71,15 +73,13 @@ export default function ChangeCityModal({
               />
             )}
           </div>
-
-          {/* Search Results Container */}
           {showResults && (
-            <div className="mt-12">
-              {cityOptions.map((city: any, index: number) => {
+            <div className="mt-14">
+              {cityOptions?.map((city: any, index: number) => {
                 return (
                   <div
                     key={index}
-                    onMouseDown={() => search(city)}
+                    onMouseDown={() => searchForCityGeoCords(city)}
                     className="cursor-pointer hover:bg-gray-500 hover:bg-opacity-10 pt-2 pb-1"
                   >
                     {city.name} - {city.state} - {city.country}

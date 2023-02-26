@@ -1,30 +1,36 @@
-import React from "react";
 import { iSelectedCity } from "../types";
+import { convertTempUnits } from "../utils/utilities";
 import Loader from "./Loader";
 import WeatherIcon from "./WeatherIcon";
 
 interface iTodayWeatherDisplay {
   selectedCity: iSelectedCity | null;
-  tempUnit: (value: number) => number;
+  isCelsius: boolean;
 }
 
 export default function TodayWeatherDisplay({
   selectedCity,
-  tempUnit,
+  isCelsius,
 }: iTodayWeatherDisplay) {
   return (
     <>
-      <div className=" absolute top-3 left-3 ">
+      <div className="w-full">
         {selectedCity !== null ? (
-          <div className="flex gap-2 items-end">
-            <div className="text-sky-600 text-5xl w-auto font-light  ">
-              {tempUnit(Number(selectedCity.weather.days[0].temp))}&#176;
+          <div className="p-1 flex gap-2 justify-start  items-center ">
+            <div className="flex">
+              <div className="text-textblue text-5xl w-auto font-light  ">
+                {convertTempUnits(
+                  Number(selectedCity.weather.days[0].temp),
+                  isCelsius
+                )}
+                &#176;
+              </div>
+              <WeatherIcon
+                className="text-textblue -ml-1 text-6xl duration-200 transform"
+                icon={selectedCity.weather.days[0].icon}
+              />
             </div>
-            <WeatherIcon
-              className="text-sky-500 text-6xl duration-200 transform translate-y-2"
-              icon={selectedCity.weather.days[0].icon}
-            />
-            <div className="text-sm text-left text-sky-600">
+            <div className="text-left sm:text-base text-sm text-textblue ">
               <div>{selectedCity.weather.days[0].conditions}</div>
               <div>{selectedCity.weather.days[0].windspeed} mph</div>
             </div>
