@@ -14,18 +14,14 @@ export default function WeatherAppUIContainer() {
   return (
     <div className="max-w-[670px]">
       <div className="shadow-2xl relative bg-[#D9FBFF] mx-2">
-        <div className=" absolute top-0 px-3 py-2 left-0 w-full flex flex-col xs:flex-row justify-between">
+        <div className=" absolute top-0 px-3 py-2 left-0 w-full flex flex-col sm:flex-row justify-between">
           <TodayWeatherDisplay
             selectedCity={selectedCity}
             isCelsius={isCelsius}
           />
-          <BiSearchAlt
-            className="absolute text-xl top-3 right-[75px] cursor-pointer duration-200 text-textblue hover:text-weatherBlue"
-            onClick={() => setShowSearchPopup(true)}
-          />
           <TempToggle isCelsius={isCelsius} setIsCelsius={setIsCelsius} />
         </div>
-        <div className="sm:pt-0 pt-20">
+        <div className="sm:pt-0 xs:pt-20 pt-44">
           <img src="/assets/Dallas.png" />
         </div>
         <img
@@ -41,6 +37,10 @@ export default function WeatherAppUIContainer() {
           isCelsius={isCelsius}
         />
       </div>
+      <BiSearchAlt
+        className="absolute text-3xl top-3 right-3 cursor-pointer duration-200 text-white hover:text-weatherBlue"
+        onClick={() => setShowSearchPopup(true)}
+      />
     </div>
   );
 }
