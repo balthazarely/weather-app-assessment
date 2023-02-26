@@ -1,22 +1,35 @@
+.testtest {
+	font-family: "Open Sans";
+	font-weight: 700;
+}
+.testtest1 {
+	font-family: "Open Sans";
+	font-weight: 600;
+}.testtest2 {
+	font-family: "Open Sans";
+	font-weight: 700;
+}
 
 .temp-wrapper {
   height: 25px;
   width: 55px;
   position: absolute;
-  top: 82px;
-  left: unset;
-  left: 12px;
+  top: 50px;
+  right: 12px;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 400px) {
   .temp-wrapper {
     height: 25px;
     width: 55px;
     position: absolute;
     top: 12px;
     right: 12px;
-    left: unset;
   }
+}
+
+.rule {
+	border: 1px solid #D8D8D8;
 }
 
 .clouds-animation-2 {
@@ -55,3 +68,4 @@
 		transform: translateX(-8px);
 	}
 }
+

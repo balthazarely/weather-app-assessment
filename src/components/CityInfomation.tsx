@@ -1,13 +1,12 @@
 import moment from "moment";
 import Loader from "./Loader";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { iSelectedCity } from "../types";
+import { useContext } from "react";
+import { GlobalContext } from "../store/store";
 
-interface iCityInfomation {
-  selectedCity: iSelectedCity | null;
-}
+export default function CityInfomation() {
+  const { selectedCity } = useContext(GlobalContext);
 
-export default function CityInfomation({ selectedCity }: iCityInfomation) {
   return (
     <div className="h-[65px] text-white">
       {selectedCity ? (
@@ -15,12 +14,12 @@ export default function CityInfomation({ selectedCity }: iCityInfomation) {
           <div className="flex relative flex-col">
             <div className="flex items-center justify-center gap-2">
               <FaMapMarkerAlt />
-              <h1 className="text-2xl font-bold ">
+              <h1 className="text-xl font-bold ">
                 {selectedCity.name}, {selectedCity.state}
               </h1>
             </div>
           </div>
-          <h3 className="text-center">
+          <h3 className="text-center text-sm ">
             {moment(selectedCity.weather.days[0].datetime).format(
               "dddd, MMM  Do, YYYY"
             )}
