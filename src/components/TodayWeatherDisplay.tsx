@@ -14,9 +14,9 @@ export default function TodayWeatherDisplay({
 }: iTodayWeatherDisplay) {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full z-50">
         {selectedCity !== null ? (
-          <div className="p-1 flex gap-2 justify-start  items-center ">
+          <div className="p-1 flex sm:flex-row flex-col  gap-2 justify-start  items-start ">
             <div className="flex">
               <div className="text-textblue text-5xl w-auto font-light  ">
                 {convertTempUnits(
